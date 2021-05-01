@@ -2,5 +2,16 @@
   "Acctions": {
     "filters": "Filtros",
     "clear": "Limpiar"
+  },
+  "Labels": {
+    "nat": "Nacionalidades"
+  },
+  "Fields": {
+    "gender": "Genero",
+    "name": "Nombre",
+    "email": "Correo electronico",
+    "nat": "Naionalidad",
+    "dob": "Fecha de Nacimiento",
+    "registered": "Regisrado"
   }
 }

@@ -1,11 +1,17 @@
+import { ref } from 'vue';
+
 import { Filters } from '@/models/randomUser/Filters';
-import { Reponse } from '@/models/randomUser/Response';
+import { User } from '@/models/randomUser/User';
 import RandomUserRepo from '@/repositories/RandomUserRepo';
 
 const randomUserRepo = new RandomUserRepo();
 
-export default function useRandomUser() {
-  const findUsers = (filters: Filters) => new Promise<Reponse | undefined>(async (resolve) => {
+export default function useRandomUser(findFilters?: Filters) {
+  const users = ref<User[]>();
+  const usersLoading = ref(false);
+
+  const findUsers = async (filters: Filters) => {
+    usersLoading.value = true;
     const filtersInner = { ...filters };
 
     Object.keys(filtersInner).forEach((key) => (filtersInner && filtersInner[key] === undefined) && delete filtersInner[key]);
@@ -13,10 +19,12 @@ export default function useRandomUser() {
 
     const data = await randomUserRepo.getByFilters(query);
 
-    console.log(data);
+    users.value = data.results;
 
-    resolve(data);
-  });
+    usersLoading.value = false;
+  };
 
-  return { findUser: findUsers };
+  if (findFilters) findUsers(findFilters);
+
+  return { users, usersLoading, findUsers };
 }
