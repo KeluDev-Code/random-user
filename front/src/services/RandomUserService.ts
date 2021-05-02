@@ -6,7 +6,7 @@ import RandomUserRepo from '@/repositories/RandomUserRepo';
 
 const randomUserRepo = new RandomUserRepo();
 
-export default function useRandomUser(findFilters?: Filters) {
+export default function useRandomUser() {
   const users = ref<User[]>();
   const usersLoading = ref(false);
 
@@ -14,17 +14,22 @@ export default function useRandomUser(findFilters?: Filters) {
     usersLoading.value = true;
     const filtersInner = { ...filters };
 
-    Object.keys(filtersInner).forEach((key) => (filtersInner && filtersInner[key] === undefined) && delete filtersInner[key]);
+    Object.keys(filtersInner)
+      .forEach((key) => (filtersInner && (filtersInner[key] === null || filtersInner[key] === undefined)) && delete filtersInner[key]);
     const query = Object.keys(filtersInner).map((key) => `${key}=${filtersInner[key]}`).join('&');
 
     const data = await randomUserRepo.getByFilters(query);
+
+    if (filtersInner.age) {
+      data.results = data.results.filter((x) => x.dob.age === parseInt(filtersInner.age?.toString() || '', 10));
+    }
 
     users.value = data.results;
 
     usersLoading.value = false;
   };
 
-  if (findFilters) findUsers(findFilters);
-
-  return { users, usersLoading, findUsers };
+  return {
+    users, usersLoading, findUsers,
+  };
 }

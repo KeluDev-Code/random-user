@@ -1,17 +1,45 @@
 {
   "Acctions": {
     "filters": "Filtros",
-    "clear": "Limpiar"
+    "clear": "Limpiar",
+    "show": "Ver",
+    "apply": "Aplicar",
+    "showResume": "Ver usuario",
+    "addFavorite": "Añadir a favoritos",
+    "removeFavorite": "Quitar de favoritos",
+    "export": "Exportar a CSV"
   },
   "Labels": {
-    "nat": "Nacionalidades"
+    "age": "Edad",
+    "actions": "Acciones",
+    "cancel": "Cancelar",
+    "ok": "Aceptar",
+    "addToFavoriteList": "¿Dónde desea añadir los usuarios?",
+    "add": "Añadir",
+    "createList": "Nueva lista",
+    "addToList": "Lista creada",
+    "close": "Cerrar"
   },
   "Fields": {
     "gender": "Genero",
     "name": "Nombre",
-    "email": "Correo electronico",
-    "nat": "Naionalidad",
+    "email": "Correo electrónico",
+    "nat": "Nacionalidad",
     "dob": "Fecha de Nacimiento",
-    "registered": "Regisrado"
+    "registered": "Registrado",
+    "favorites": "Favoritos",
+    "city": "Ciudad",
+    "street": "Calle",
+    "phone": "Número de teléfono",
+    "phoneCell": "Número de teléfono móvil"
+  },
+  "Gender": {
+    "female": "Femenino",
+    "male": "Masculino"
+  },
+  "Notify": {
+    "addFavorite": "Usuario añadido a la lista '{nickName}' correctamente",
+    "removeFavorite": "Usuario eliminado de la lista '{nickName}' correctamente",
+    "exportError": "La descarga ha sido denegada por navegador"
   }
 }

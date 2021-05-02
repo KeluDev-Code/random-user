@@ -3,5 +3,6 @@ export interface Filters {
   results?: number;
   page?: number;
   gender?: 'female' | 'male';
+  age?: number;
   nat?: string;
 }

@@ -23,8 +23,13 @@ export interface Timezone {
     description: string;
 }
 
+export interface Street{
+  name: string
+number: number
+}
+
 export interface Location {
-    street: string;
+    street: Street;
     city: string;
     state: string;
     postcode: string;
