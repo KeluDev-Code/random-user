@@ -180,7 +180,7 @@
 
 <script lang="ts">
 import { useDialogPluginComponent } from 'quasar';
-import { onMounted, PropType, ref } from 'vue';
+import { PropType, ref } from 'vue';
 
 import useFavorite from '@/services/FavoriteService';
 import useMapOpenLayers from '@/services/MapOpenLayers';

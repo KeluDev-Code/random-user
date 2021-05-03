@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es2018",
+    "module": "ES2020",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -15,7 +15,8 @@
     "types": [
       "webpack-env",
       "mocha",
-      "chai"
+      "chai",
+      "jest"
     ],
     "paths": {
       "@/*": [
@@ -23,10 +24,11 @@
       ]
     },
     "lib": [
-      "esnext",
+      "es2018",
       "dom",
       "dom.iterable",
-      "scripthost"
+      "scripthost",
+      "ES2016.Array.Include"
     ]
   },
   "include": [

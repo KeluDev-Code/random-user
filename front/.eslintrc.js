@@ -63,12 +63,31 @@ module.exports = {
   overrides: [
     {
       files: [
+        '*.test.js',
+        '*.spec.js',
+        '*.spec.ts'
+      ],
+      rules: {
+        'no-unused-expressions': 'off'
+      }
+    },
+    {
+      files: [
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
       ],
       env: {
-        mocha: true,
-      },
+        mocha: true
+      }
     },
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
   ],
 };
