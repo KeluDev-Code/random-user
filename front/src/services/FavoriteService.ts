@@ -3,8 +3,11 @@ import { Dialog, Notify } from 'quasar';
 import { useI18n } from 'vue-i18n';
 
 import FavoriteSelect from '@/components/FavoriteSelect.vue';
+import FavoriteRepo from '@/repositories/FavoriteRepo';
 import { User } from '@/models/randomUser/User';
 import { Favorite } from '@/models/Favorite';
+
+const favoriteRepo = new FavoriteRepo();
 
 export default function useFavorite() {
   const { t } = useI18n();
@@ -13,20 +16,34 @@ export default function useFavorite() {
   const favorites = ref<Favorite[]>([]);
   const usersSelected = ref<User[]>([]);
 
+  const loadFavorites = async () => {
+    favorites.value = (await favoriteRepo.getAll() || []).filter((x) => x.nickName);
+  };
+
   const addFavorite = async (nickName: string, users: User[]) => {
     const favoriteIndex = favorites.value.findIndex((x) => x.nickName === nickName);
-    if (favoriteIndex > -1) {
-      favorites.value[favoriteIndex].users = [...favorites.value[favoriteIndex].users, ...users]
-        .filter((value, i, array) => array.findIndex((x: User) => (x.email === value.email)) === i);
-    } else {
-      const favorite = { nickName, users };
-      favorites.value.push(favorite);
+    const favorite = { nickName, users };
+    try {
+      if (favoriteIndex > -1) {
+        const data = await favoriteRepo.put(favorite);
+        if (data && data.length) {
+          favorites.value[favoriteIndex].users = data[0].users;
+        }
+      } else {
+        await favoriteRepo.post(favorite);
+
+        favorites.value.push(favorite);
+      }
+      Notify.create({
+        type: 'positive',
+        message: t('Notify.addFavorite', { nickName }),
+      });
+    } catch (error) {
+      Notify.create({
+        type: 'negative',
+        message: t('Notify.error404', { nickName }),
+      });
     }
-    Notify.create({
-      type: 'positive',
-      message: t('Notify.addFavorite', { nickName }),
-    });
-    window.sessionStorage.setItem('favorites', JSON.stringify(favorites.value));
   };
 
   const handleAddFavorite = async (nickName?: string, users?: User[]) => {
@@ -50,27 +67,21 @@ export default function useFavorite() {
   };
 
   const removeFavorite = async (nickName: string, users: User[] = usersSelected.value, callback: ()=> void) => {
-    const favoriteIndex = favorites.value.findIndex((x) => x.nickName === nickName);
-    if (favoriteIndex > -1) {
-      favorites.value[favoriteIndex].users = favorites.value[favoriteIndex].users
-        .filter((value) => users.findIndex((x: User) => (x.email === value.email)));
+    try {
+      await favoriteRepo.delete({ nickName, users });
 
-      if (!favorites.value[favoriteIndex].users.length) {
-        favorites.value = favorites.value.filter((x) => x.nickName !== nickName);
-      }
+      Notify.create({
+        type: 'positive',
+        message: t('Notify.removeFavorite', { nickName }),
+      });
+      callback();
+    } catch (error) {
+      Notify.create({
+        type: 'negative',
+        message: t('Notify.error404', { nickName }),
+      });
     }
-    Notify.create({
-      type: 'negative',
-      message: t('Notify.removeFavorite', { nickName }),
-    });
-    callback();
   };
-
-  const loadFavorites = () => {
-    // TODO
-  };
-
-  favorites.value = JSON.parse(window.sessionStorage.getItem('favorites') || '[]');
 
   return {
     favorites, removeFavorite, usersSelected, favoriteSelected, handleAddFavorite, loadFavorites,

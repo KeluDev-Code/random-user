@@ -91,7 +91,7 @@ export default {
     // onDialogCancel - Function to call to settle dialog with "cancel" outcome
     const onOKClick = () => {
       // on OK, it is REQUIRED to call onDialogOK
-      onDialogOK(usedFavorite.favoriteSelected.value?.nickName || nickName);
+      onDialogOK(usedFavorite.favoriteSelected.value?.nickName || nickName.value);
     };
 
     onMounted(() => {

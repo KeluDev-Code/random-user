@@ -169,7 +169,10 @@
         </q-table>
       </div>
 
-      <div class="q-pa-sm col-12 row justify-end">
+      <div
+        v-show="!!favoriteSelected"
+        class="q-pa-sm col-12 row justify-end"
+      >
         <div class="col-auto">
           <q-btn
             color="secondary"
@@ -275,7 +278,10 @@ export default defineComponent({
 
     const loadUsers = async (props: {pagination: Pagination} = { pagination: pagination.value }) => {
       if (usedFavorite.favoriteSelected.value) {
-        usedRandomUser.users.value = usedFavorite.favoriteSelected.value?.users || [];
+        await usedFavorite.loadFavorites();
+
+        usedRandomUser.users.value = usedFavorite.favorites.value
+          .find((x) => x.nickName === usedFavorite.favoriteSelected.value?.nickName)?.users || [];
         pagination.value.rowsNumber = usedRandomUser.users.value?.length || 0;
       } else {
         const { page, rowsPerPage } = props.pagination;
@@ -315,6 +321,7 @@ export default defineComponent({
 
     onMounted(() => {
       loadUsers();
+      usedFavorite.loadFavorites();
     });
 
     return {

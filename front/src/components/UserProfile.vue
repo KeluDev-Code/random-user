@@ -182,7 +182,6 @@
 import { useDialogPluginComponent } from 'quasar';
 import { onMounted, PropType, ref } from 'vue';
 
-// eslint-disable-next-line import/no-cycle
 import useFavorite from '@/services/FavoriteService';
 import useMapOpenLayers from '@/services/MapOpenLayers';
 import { User } from '@/models/randomUser/User';
@@ -218,9 +217,10 @@ export default {
       onDialogOK(usedFavorite.favoriteSelected.value?.nickName || nickName);
     };
 
-    onMounted(() => {
+    const handleAddFavorite = () => {
       usedFavorite.loadFavorites();
-    });
+      usedFavorite.handleAddFavorite();
+    };
 
     return {
       ...useMapOpenLayers(props.user.location.coordinates, mapRoot),
@@ -233,9 +233,7 @@ export default {
 
       onDialogCancel,
 
-      handleAddFavorite: usedFavorite.handleAddFavorite,
-      favoriteSelected: usedFavorite.favoriteSelected,
-      favorites: usedFavorite.favorites,
+      handleAddFavorite,
       nickName,
       mapRoot,
     };

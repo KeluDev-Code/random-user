@@ -4,3 +4,7 @@ export interface Favorite {
     nickName: string;
     users: User[];
 }
+
+export interface FavoriteResponse {
+    favorites?: Favorite[]
+}

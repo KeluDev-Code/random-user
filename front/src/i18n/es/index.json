@@ -40,6 +40,7 @@
   "Notify": {
     "addFavorite": "Usuario añadido a la lista '{nickName}' correctamente",
     "removeFavorite": "Usuario eliminado de la lista '{nickName}' correctamente",
-    "exportError": "La descarga ha sido denegada por navegador"
+    "exportError": "La descarga ha sido denegada por navegador",
+    "error404": "Usuario no encontrado"
   }
 }
