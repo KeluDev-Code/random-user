@@ -6,14 +6,13 @@ const requestInit = {
 };
 
 async function http<T>(path: string, config: RequestInit): Promise<T> {
-  // const request = new Request(path, config);
   const response = await fetch(path, config);
-  if (!response.ok) {
+  /* if (!response.ok) {
     const error = new Error(response.statusText);
     error.name = response.status.toString();
 
     throw error;
-  }
+  } */
 
   // may error if there is no body, return empty array
   return response.json().catch(() => ({}));

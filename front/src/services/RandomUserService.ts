@@ -8,7 +8,7 @@ const randomUserRepo = new RandomUserRepo();
 
 export default function useRandomUser() {
   const users = ref<User[]>();
-  const usersLoading = ref(false);
+  const usersLoading = ref(true);
 
   const findUsers = async (filters: Filters) => {
     usersLoading.value = true;
