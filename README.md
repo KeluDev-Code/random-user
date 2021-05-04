@@ -9,5 +9,4 @@ In folder ["back"](back) located at the root of the project for store favorite u
 In folder ["front"](front) located at the root of the project for launch the web and use both apis.
 
 ## License
-
-This project is licensed under MIT license.
+This project is licensed under MIT license. See the file ["LICENSE"](LICENSE) located at the root of the project for more details.
