@@ -21,7 +21,7 @@ const QComponents = {
 // establecemos globalmente los components
 // config.global.components = QComponents;
 
-// mock la libreria vue-i18n solo se sobrescribe 'useI18n'
+// mock sobre la libreria 'vue-i18n' donde solo se hace el mock a 'useI18n'
 jest.mock(
   'vue-i18n',
   () => {
@@ -40,7 +40,7 @@ describe('FavoriteSelect.vue', () => {
   beforeEach(() => {
     fetchMock.doMock();
 
-    wrapper = mount(FavoriteSelect, {
+    wrapper = shallowMount(FavoriteSelect, {
       global: {
         // establecemos los components del fichero
         components: QComponents,
@@ -50,7 +50,7 @@ describe('FavoriteSelect.vue', () => {
 
   test('debe de mostrarse correctamente', () => {
     // const { html } = wrapper;
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.element).toMatchSnapshot();
   });
 
   test('renders props.msg when passed', () => {
