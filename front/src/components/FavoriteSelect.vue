@@ -17,7 +17,7 @@
           <div class="q-pa-sm">
             <q-select
               v-model="favoriteSelected"
-              :disable="!!nickName"
+              :disable="!favorites.length || !!nickName"
               :label="$t('Fields.favorites')"
               :options="favorites"
               option-label="nickName"

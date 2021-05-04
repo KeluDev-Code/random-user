@@ -307,6 +307,8 @@ export default defineComponent({
         .onDismiss(() => {
           if (usedFavorite.favoriteSelected.value) {
             loadUsers();
+          } else {
+            usedFavorite.loadFavorites();
           }
         });
     };

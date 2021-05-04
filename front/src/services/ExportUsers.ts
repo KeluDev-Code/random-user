@@ -23,16 +23,16 @@ export default function useExportUsers() {
 }[], rows?: any[]) => {
     if (rows && rows.length) {
       // We eliminate the columns without 'field' and the rows are concatenated
-      const content = [columns.filter((x) => x.field).map((col) => getFormatedValue(col.label))]
+      const content = [columns.filter((x) => x.field).map((col) => getFormatedValue(col.label)).join(';')]
         .concat(
 
           rows.map((row: { [x: string]: string }) => columns
             // The row is formatted based on the column
-            .map((col) => getFormatedValue(row[col.field || ''], col.format)).join(',')),
+            .map((col) => getFormatedValue(row[col.field || ''], col.format)).join(';')),
 
         ).join('\r\n');
 
-      const status = exportFile('random-users.csv', content, 'text/csv');
+      const status = exportFile('random-users.csv', `\ufeff${content}`, 'text/csv;charset=utf-8');
 
       if (status !== true) {
         Notify.create({

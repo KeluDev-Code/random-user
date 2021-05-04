@@ -1,29 +1,30 @@
-# random-user-solutio
+# Front end (Vue 3 + TS)
 
-## Project setup
+## Installation
+
+To install the server, you must launch the following command in your console:
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Usage
+After the installation, to launch the server you must go to the path where you have downloaded the project and launch the following command:
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
+#### Run your unit tests:
 ```
 npm run test:unit
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Configuration
+You can configure the urls of the endpoints in the `.env` file located in the root folder
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+|Name|EndPoint|
+|---|---|
+|VUE_APP_RANDOM_USER_API|https://randomuser.me/api|
+|VUE_APP_FAVORITE_API|http://localhost:3000/api|
