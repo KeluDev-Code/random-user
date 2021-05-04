@@ -12,6 +12,7 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    'linebreak-style': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'import/order': [
@@ -65,29 +66,29 @@ module.exports = {
       files: [
         '*.test.js',
         '*.spec.js',
-        '*.spec.ts'
+        '*.spec.ts',
       ],
       rules: {
-        'no-unused-expressions': 'off'
-      }
+        'no-unused-expressions': 'off',
+      },
     },
     {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
       env: {
-        mocha: true
-      }
+        mocha: true,
+      },
     },
     {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
       env: {
-        jest: true
-      }
-    }
+        jest: true,
+      },
+    },
   ],
 };
