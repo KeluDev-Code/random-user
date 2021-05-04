@@ -67,12 +67,12 @@
 
 <script lang="ts">
 import { useDialogPluginComponent } from 'quasar';
-import { onMounted, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 // eslint-disable-next-line import/no-cycle
 import useFavorite from '@/services/FavoriteService';
 
-export default {
+export default defineComponent({
   name: 'FavoriteSelect',
   emits: [
     ...useDialogPluginComponent.emits,
@@ -113,5 +113,5 @@ export default {
       nickName,
     };
   },
-};
+});
 </script>
