@@ -9,6 +9,7 @@ import {
 } from 'quasar';
 
 import FavoriteSelect from '@/components/FavoriteSelect.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
 
 // @ts-ignore
 //
@@ -40,7 +41,7 @@ describe('FavoriteSelect.vue', () => {
   beforeEach(() => {
     fetchMock.doMock();
 
-    wrapper = shallowMount(FavoriteSelect, {
+    wrapper = mount(FavoriteSelect, {
       global: {
         // establecemos los components del fichero
         components: QComponents,
@@ -48,9 +49,27 @@ describe('FavoriteSelect.vue', () => {
     });
   });
 
-  test('debe de mostrarse correctamente', () => {
+  test('HelloWorld debe de mostrarse correctamente', async () => {
     // const { html } = wrapper;
-    expect(wrapper.element).toMatchSnapshot();
+
+    const wrapperSnapshot = mount(HelloWorld);
+
+    // console.log(wrapperSnapshot);
+
+    expect(wrapperSnapshot.html()).toMatchSnapshot();
+  });
+
+  test('debe de mostrarse correctamente', async () => {
+    // const { html } = wrapper;
+
+    const wrapperSnapshot = mount(FavoriteSelect, {
+      global: {
+        mocks: { $t: (key:string) => key },
+      },
+    });
+
+    // console.log({ ...config.global.components, ...FavoriteSelect.components });
+    expect(wrapperSnapshot.html()).toMatchSnapshot();
   });
 
   test('renders props.msg when passed', () => {
