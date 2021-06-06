@@ -228,7 +228,7 @@ export default defineComponent({
   name: 'Home',
   setup() {
     const { t } = useI18n();
-    const $q = useQuasar();
+    const { dialog } = useQuasar();
 
     const usedRandomUser = useRandomUser();
     const usedFavorite = useFavorite();
@@ -297,7 +297,7 @@ export default defineComponent({
     };
 
     const showUserProfile = (user: User) => {
-      $q.dialog({
+      dialog({
         component: UserProfileVue,
         componentProps: {
           user,
