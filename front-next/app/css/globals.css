@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'core.css';
+
+:root {
+  --foreground-rgb: 2, 8, 12;
+  --background-rgb: 214, 219, 220;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-rgb: 2, 8, 12;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+.table--showColors tr:nth-child(odd) {
+  background-color: hsl(197, 79%, 8%)
+}
+
+.table--showColors tr:nth-child(even) {
+  background-color:  hsl(179, 84%, 8%)
+}
