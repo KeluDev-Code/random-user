@@ -5,7 +5,7 @@
       "node": {
         "extensions": [
           ".js",
-          ".ts",
+          ".ts"
         ]
       }
     }
